@@ -1,3 +1,15 @@
+## Installing Escape Room 
+
+```
+git clone https://github.com/mlazoy/unique_softlab.git && cd unique_softlab
+./init.sh
+```
+
+After the above steps the ESACPE directory should have been created successfully. Read the rules in the end of this section.
+```
+cd ESCAPE
+```
+
 # 🚀 Μini Tutorial for Linux Commands
 
 Γενικά ένα σύστημα αρχείων (file system) είναι η δομή που χρησιμοποιεί ένα λειτουργικό σύστημα για την αποθήκευση, οργάνωση και διαχείριση αρχείων σε έναν αποθηκευτικό δίσκο (π.χ. HDD, SSD, USB).
@@ -87,6 +99,7 @@
 ✅ Ποιες είναι οι κατάλληλες εντολές για αυτές τις ενέργειες;  
 
 🎉 **Have fun hacking your way through Linux!** 🎉
+
 
 
 
