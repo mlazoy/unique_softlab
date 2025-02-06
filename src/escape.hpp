@@ -200,7 +200,7 @@ public :
         printRoomEntry("../.room10_entry.txt");
         vector<string> seq(10);
         char entr; 
-        char* pass;
+        char pass[50];
 
         seq[0] = "The king wakes up in the morning, goes from his bedroom to the bathroom to wash his teeth, ";
         seq[1] = "then to the garden to water his beautiful plants, ";
@@ -222,13 +222,13 @@ public :
         cout << RESET;
 
         cin >> pass;
-        if (strcmp(pass ,PASSWORD)) {
+        if (strcmp(pass ,PASSWORD) != 0) {
             cout << RED << "Error! Incorrect password" << RESET << endl;
             exit(1);
         }
         else {
-            cout << GREEN << "SUCCESS!\n" << RESET << "You managed to reach the end of this game! \
-            You are really a shell script master! If you liked this game, ECE is the right place for you\
+            cout << GREEN << "SUCCESS!\n" << RESET << "You managed to reach the end of this game! \n \
+            You are really a shell script master! If you liked this game, ECE is the right place for you \n \
             See you there!" << endl;
         }
     }
