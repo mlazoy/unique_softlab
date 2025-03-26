@@ -19,3 +19,6 @@ done
 
 chmod 000 $ESCAPE_PATH"/room7/readme.txt"
 mv $ESCAPE_PATH"/icons" $ESCAPE_PATH"/../icons"
+
+# be careful with this 
+rm -r src
