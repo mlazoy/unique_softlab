@@ -7,7 +7,7 @@ git clone https://github.com/mlazoy/unique_softlab.git && cd unique_softlab
 
 After the above steps the ESACPE directory should have been created successfully. Read the rules in the end of this section.
 ```
-cd ESCAPE
+cd escape
 ```
 
 # 🚀 Μini Tutorial for Linux Commands
