@@ -11,10 +11,9 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <vector>
+#include <limits>
 
 using namespace std;
-
-const char* PASSWORD = "$scriptmaster$";
 
 // ANSI escape codes for colors
 #define RESET   "\033[0m"
@@ -49,9 +48,9 @@ protected:
 
 class room1 : public room {
 public :
-    room1() { room('t','e'); }
+    room1() : room('t','e') {}
     virtual void play () override {
-        printRoomEntry("../icons/room1_entry.txt");
+        printRoomEntry("../../icons/room1_entry.txt");
         int num;
         cout << YELLOW << "How many dwarves are in this room?" << RESET << endl;
         cin >> num;
@@ -72,9 +71,9 @@ public :
 
 class room2 : public room {
 public :
-    room2() { room('$','s'); }
+    room2() : room('$','s') {}
     virtual void play () override {
-        printRoomEntry("../icons/room2_entry.txt");
+        printRoomEntry("../../icons/room2_entry.txt");
         sleep(5);
         if (filesAreEqual()) cout << GREEN << "SUCCESS!\n Secret: (" 
                                   << key1 << ", " << key2 << ")\n" << RESET << endl;
@@ -138,9 +137,9 @@ private:
 
 class room3 : public room {
 public :
-    room3() { room('c','r'); }
+    room3() : room('c','r') {}
     virtual void play () override {
-        printRoomEntry("../icons/room3_entry.txt");
+        printRoomEntry("../../icons/room3_entry.txt");
         FILE *f = fopen("bomb", "r");
         if (f !=NULL && free_of_bombs()){
             // first try 
@@ -198,9 +197,9 @@ private :
 
 class room4 : public room {
 public : 
-    room4 () { room('a','s'); } 
+    room4 () : room('a','s') {} 
     virtual void play () override {
-        printRoomEntry("../icons/room4_entry.txt");
+        printRoomEntry("../../icons/room4_entry.txt");
         string ans;
         cout << "Enter your destination path: ";
         cin >> ans;
@@ -215,16 +214,17 @@ public :
         }
     }
 private:
-    string path = "/ESCAPE/Australia/Egypt/Hawaii/Lanikai";
+    string path = "/escape/Australia/Egypt/Hawaii/Lanikai";
 };
 
 class room5 : public room {
 public:
-    room5() {room('t', 'm');}
+    room5() : room('t', 'm') {}
 
     virtual void play () override {
+        printRoomEntry("../../icons/room5_entry.txt");
         char symbol1, symbol2; 
-
+        sleep(5);
         cout << "Enter first symbol: " << endl;
         cin >> symbol1;
         cout << "Enter second symbol: " << endl;
@@ -242,8 +242,10 @@ public:
 
 class room6 : public room {
 public : 
-    room6() {room('r', '$'); }
+    room6() : room('r', '$') {}
     virtual void play () override {
+        printRoomEntry("../../icons/room6_entry.txt");
+        sleep(5);
         string size, date;
         cout << "a) Who's the biggest?" << endl;
         cin >> size; 
@@ -270,8 +272,9 @@ private:
 
 class room7 : public room {
 public: 
-    room7 () { room('i', 'p'); }
+    room7 () : room('i', 'p') {}
     virtual void play () override {
+        printRoomEntry("../../icons/room7_entry.txt");
         struct stat fileStat;
         if (stat("lock", &fileStat) != 0) {
             perror("stat");
@@ -283,7 +286,7 @@ public:
             (fileStat.st_mode & S_IRWXO) == 0)    // O
                 cout << GREEN << "SUCCESS!\n Secret:( " << key1 << ", " << key2 << ")\n" << RESET;
         else {
-            cout << RED << "Error.Lock Properly!\n" << RESET; 
+            cout << RED << "Fail.\n" << RESET; 
             exit(0);
         }   
     }
@@ -294,10 +297,10 @@ class room8 : public room {
 public :
     room8 () {}
     virtual void play () override {
-        printRoomEntry("../icons/room8_entry.txt");
+        printRoomEntry("../../icons/room8_entry.txt");
         vector<string> seq(10);
         char entr; 
-        char pass[50];
+        string pass;
 
         seq[0] = "The king wakes up in the morning, goes from his bedroom to the bathroom to wash his teeth, ";
         seq[1] = "then to the garden to water his beautiful plants, ";
@@ -319,16 +322,18 @@ public :
         cout << RESET;
 
         cin >> pass;
-        if (strcmp(pass ,PASSWORD) != 0) {
-            cout << RED << "Error! Incorrect password" << RESET << endl;
-            exit(1);
+
+        if (pass == PASSWORD) {
+            cout << GREEN << "SUCCESS!\n" << RESET << "You managed to reach the end of this game!\n" << 
+            "You are really a shell script master!\n If you liked this game, ECE is the right place for you\n";
         }
         else {
-            cout << GREEN << "SUCCESS!\n" << RESET << "You managed to reach the end of this game! \n \
-            You are really a shell script master! If you liked this game, ECE is the right place for you \n \
-            See you there!" << endl;
+            cout << RED << "Error! Incorrect password " << pass << RESET << endl;
+            exit(0);
         }
     }
+private:
+    const string PASSWORD = "scriptmaster$";
 };
 
 // test from okeanos VM with public IP: 83.212.72.157
