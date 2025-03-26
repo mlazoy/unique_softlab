@@ -14,7 +14,7 @@
 
 using namespace std;
 
-const char* PASSWORD = "$shellscriptmaster$";
+const char* PASSWORD = "$scriptmaster$";
 
 // ANSI escape codes for colors
 #define RESET   "\033[0m"
@@ -49,7 +49,7 @@ protected:
 
 class room1 : public room {
 public :
-    room1() { room('h','e'); }
+    room1() { room('t','e'); }
     virtual void play () override {
         printRoomEntry("../icons/room1_entry.txt");
         int num;
@@ -138,7 +138,7 @@ private:
 
 class room3 : public room {
 public :
-    room3() { room('s','c'); }
+    room3() { room('c','r'); }
     virtual void play () override {
         printRoomEntry("../icons/room3_entry.txt");
         FILE *f = fopen("bomb", "r");
@@ -198,7 +198,7 @@ private :
 
 class room4 : public room {
 public : 
-    room4 () { room('r','a'); } 
+    room4 () { room('a','s'); } 
     virtual void play () override {
         printRoomEntry("../icons/room4_entry.txt");
         string ans;
@@ -220,7 +220,7 @@ private:
 
 class room5 : public room {
 public:
-    room5() {room('m', 'a');}
+    room5() {room('t', 'm');}
 
     virtual void play () override {
         char symbol1, symbol2; 
@@ -240,11 +240,61 @@ public:
     }
 };
 
-class room10 : public room {
-public :
-    room10 () {}
+class room6 : public room {
+public : 
+    room6() {room('r', '$'); }
     virtual void play () override {
-        printRoomEntry("../icons/room10_entry.txt");
+        string size, date;
+        cout << "a) Who's the biggest?" << endl;
+        cin >> size; 
+        if (size == biggest) {
+            cout << "b) Who's the oldest?" << endl;
+            cin >> date;
+            if ( date == oldest) {
+                cout << GREEN << "SUCCESS!\n Secret:(" << key1 << ", " << key2 << ")" << RESET << endl;
+            }
+            else {
+                cout << RED << "Wrong age. Try again.\n" << RESET ;
+                exit(0);
+            }
+        }
+        else {
+            cout << RED << "Wrong size. Try again.\n" << RESET ;
+            exit(0);
+        }
+    }
+private: 
+    string biggest = "Paul";
+    string oldest = "Sophia";
+};
+
+class room7 : public room {
+public: 
+    room7 () { room('i', 'p'); }
+    virtual void play () override {
+        struct stat fileStat;
+        if (stat("lock", &fileStat) != 0) {
+            perror("stat");
+        }
+        
+        // Check if the file has no permissions (000)
+        if ((fileStat.st_mode & S_IRWXU) == 0 &&   // U
+            (fileStat.st_mode & S_IRWXG) == 0 &&   // G
+            (fileStat.st_mode & S_IRWXO) == 0)    // O
+                cout << GREEN << "SUCCESS!\n Secret:( " << key1 << ", " << key2 << ")\n" << RESET;
+        else {
+            cout << RED << "Error.Lock Properly!\n" << RESET; 
+            exit(0);
+        }   
+    }
+
+};
+
+class room8 : public room {
+public :
+    room8 () {}
+    virtual void play () override {
+        printRoomEntry("../icons/room8_entry.txt");
         vector<string> seq(10);
         char entr; 
         char pass[50];
@@ -280,11 +330,5 @@ public :
         }
     }
 };
-
-//TODO! 
-class room6 : public room {};
-class room7 : public room {};
-class room8 : public room {};
-class room9 : public room {};
 
 // test from okeanos VM with public IP: 83.212.72.157

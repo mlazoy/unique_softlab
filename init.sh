@@ -15,3 +15,5 @@ for room_id in "${NUM_ROOMS[@]}"; do
     echo "Compiling for $VERSION..."
     g++ -std=c++17 -D$VERSION ./src/escape.cpp -o "$ESCAPE_PATH/$VERSION/play"
 done
+
+chmod 000 "$ESCAPE_PATH"/ROOM7/readme.txt
