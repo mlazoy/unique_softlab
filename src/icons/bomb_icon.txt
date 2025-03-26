@@ -1,0 +1,19 @@
+
+
+
+
+        _.-^^---....,,--       
+    _--                  --_  
+   <                        >)
+   |                         | 
+    \._                   _./  
+       ```--. . , ; .--'''       
+             | |   |             
+          .-=||  | |=-.   
+          `-=#$%&%$#=-'   
+             | ;  :|     
+    _____.,-#%&$@%#&#~,._____
+
+OUPS you fell in the trap hehe! The script didn't deleted the bomb file as it should but created multiple XL bombs instead.
+This is a very good example of showing why you shouldn't run scripts you don't know what they are doing...
+Play again to fix.

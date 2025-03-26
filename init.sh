@@ -1,14 +1,12 @@
 #!/bin/bash
 
-NUM_ROOMS=(1 2 3 10)  # Corrected array syntax
+NUM_ROOMS=(1 2 3 4 10)  
 ESCAPE_PATH="./ESCAPE"
 
 sudo rm -rf "$ESCAPE_PATH"
 mkdir -p "$ESCAPE_PATH"
 
-shopt -s dotglob  
-cp *.txt "$ESCAPE_PATH"
-shopt -u dotglob
+cp -r src/icons $ESCAPE_PATH 
 
 for room_id in "${NUM_ROOMS[@]}"; do  
     VERSION="ROOM${room_id}"  

@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <vector>
 
 using namespace std;
 
@@ -50,7 +51,7 @@ class room1 : public room {
 public :
     room1() { room('h','e'); }
     virtual void play () override {
-        printRoomEntry("../.room1_entry.txt");
+        printRoomEntry("../icons/room1_entry.txt");
         int num;
         cout << YELLOW << "How many dwarves are in this room?" << RESET << endl;
         cin >> num;
@@ -62,9 +63,8 @@ public :
             cout << RED << "FAIL! Count them again." << RESET << endl;
             exit(1);
         }
-        cout << GREEN << "CORRECT!" << RESET << endl;
+        cout << GREEN << "SUCCESS!\n Secret: (" << key1 << ", " << key2 << ")\n" << RESET << endl;
 
-        cout << BLUE << "Dwarf 17 has something to tell you..." << RESET << endl;
         exit(0);
 
     }
@@ -74,8 +74,10 @@ class room2 : public room {
 public :
     room2() { room('$','s'); }
     virtual void play () override {
-        printRoomEntry("../.room2_entry.txt");
-        if (filesAreEqual()) cout << GREEN << "SUCCESS!" << RESET << endl;
+        printRoomEntry("../icons/room2_entry.txt");
+        sleep(5);
+        if (filesAreEqual()) cout << GREEN << "SUCCESS!\n Secret: (" 
+                                  << key1 << ", " << key2 << ")\n" << RESET << endl;
         else {
             cout << RED << "Error! Nicky and clone are not identical" << RESET << endl;
             exit(1);
@@ -87,12 +89,12 @@ private:
         FILE *f2 = fopen("Nicky", "rb");
 
         if (f1 == NULL) {
-            cout << "Nicky's 'clone' doesn't exist :( " << endl;
+            cout << RED << "Nicky's 'clone' doesn't exist :( " << RESET << endl;
             exit(1);
         }
 
         if (f2 == NULL){
-            cout << "Nicky doesn't exist. You shouldn't delete Nicky" << endl;
+            cout << RED << "Nicky doesn't exist. You shouldn't delete Nicky" << RESET << endl;
             exit(1);
         }
 
@@ -138,7 +140,7 @@ class room3 : public room {
 public :
     room3() { room('s','c'); }
     virtual void play () override {
-        printRoomEntry("../.room3_entry.txt");
+        printRoomEntry("../icons/room3_entry.txt");
         FILE *f = fopen("bomb", "r");
         if (f !=NULL && free_of_bombs()){
             // first try 
@@ -163,7 +165,8 @@ public :
         }
 
         else if (f == NULL && free_of_bombs()) {
-            cout << GREEN << "SUCCESS. All bombs were removed. You are a life saver :)" << RESET << endl;
+            cout << GREEN << "SUCCESS. All bombs were removed.\n Secret: (" 
+                 << key1 << ", " << key2 << ")\n" <<  RESET << endl;
             exit(0);
         }
     }
@@ -193,11 +196,55 @@ private :
     }
 };
 
+class room4 : public room {
+public : 
+    room4 () { room('r','a'); } 
+    virtual void play () override {
+        printRoomEntry("../icons/room4_entry.txt");
+        string ans;
+        cout << "Enter your destination path: ";
+        cin >> ans;
+
+        if (ans.size() >= path.size() && ans.compare(ans.size() - path.size(), path.size(), path) == 0) {
+            cout << GREEN << "SUCCESS! You found the right track!\n Secret: ( " 
+                << key1 <<  ", " << key2 << ")\n" << RESET;
+        } 
+        else {
+            cout << RED << "WRONG Path! Try again.\n" << RESET ;
+            exit(0);
+        }
+    }
+private:
+    string path = "/ESCAPE/Australia/Egypt/Hawaii/Lanikai";
+};
+
+class room5 : public room {
+public:
+    room5() {room('m', 'a');}
+
+    virtual void play () override {
+        char symbol1, symbol2; 
+
+        cout << "Enter first symbol: " << endl;
+        cin >> symbol1;
+        cout << "Enter second symbol: " << endl;
+        cin >> symbol2;
+
+        if (symbol1 == key1 && symbol2 == key2) {
+            cout << GREEN << "SUCCESS!\n Secret: ( " << key1 <<  ", " << key2 << ")\n" << RESET;
+        }
+        else {
+            cout << RED << "Wrong secret symbols. Try again.\n" << endl;
+            exit(0);
+        }
+    }
+};
+
 class room10 : public room {
 public :
     room10 () {}
     virtual void play () override {
-        printRoomEntry("../.room10_entry.txt");
+        printRoomEntry("../icons/room10_entry.txt");
         vector<string> seq(10);
         char entr; 
         char pass[50];
@@ -235,9 +282,9 @@ public :
 };
 
 //TODO! 
-class room4 : public room {};
-class room5 : public room {};
 class room6 : public room {};
 class room7 : public room {};
 class room8 : public room {};
 class room9 : public room {};
+
+// test from okeanos VM with public IP: 83.212.72.157
