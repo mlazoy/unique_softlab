@@ -214,7 +214,7 @@ public :
         }
     }
 private:
-    string path = "/escape/Australia/Egypt/Hawaii/Lanikai";
+    string path = "/escape/room4/Australia/Egypt/Hawaii/Lanikai";
 };
 
 class room5 : public room {

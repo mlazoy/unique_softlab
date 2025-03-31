@@ -17,6 +17,6 @@ done
 
 ORANGE='\e[38;5;214m'
 RESET='\e[0m'
-printf "${ORANGE}$(cat ../.bomb_icon.txt | sed 's/%/%%/g')${RESET}\n"
+printf "${ORANGE}$(cat ../icons/bomb_icon.txt | sed 's/%/%%/g')${RESET}\n"
 
 
