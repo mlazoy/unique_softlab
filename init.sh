@@ -15,11 +15,12 @@ for room_id in "${NUM_ROOMS[@]}"; do
     cp -r "./src/room${room_id}/." "$ESCAPE_PATH/$dirname"
     echo "Compiling for $VERSION..."
     g++ -std=c++17 -D$VERSION ./src/escape.cpp -o "$ESCAPE_PATH/$dirname/play"
-    if [[ "$dirname" == "room6" ]]; then
-        touch -t 200703311430 Alex
-        touch -t 200903311430 Paul
-        touch -t 200403311430 Sophia
-        touch -t 200503311430 Jenny
+    if [[ "$room_id" -eq 6 ]]; then
+        echo "Inside room6" 
+        touch -t 200703311430 $ESCAPE_PATH/$dirname/Alex
+        touch -t 200903311430 $ESCAPE_PATH/$dirname/Paul
+        touch -t 200403311430 $ESCAPE_PATH/$dirname/Sophia
+        touch -t 200503311430 $ESCAPE_PATH/$dirname/Jenny
     fi
 done
 
